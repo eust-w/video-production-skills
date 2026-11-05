@@ -70,7 +70,7 @@ The bundled voice is Mandarin Chinese `zh-CN-XiaoxiaoNeural`. Voice settings are
 
 For new videos or substantial visual redesigns, the skill requires an actual attempt to browse MotionFace and study playable references. If access is unavailable, record the limitation and continue with accessible sources. Its delivery audit helper uses Python's standard library.
 
-Some skill instructions and reference documents remain in Chinese. The English examples below can be used to request work in English; this README does not imply that all bundled documentation has been translated.
+Both skills load English `SKILL.md` instructions and English reference documents by default. Each document links to its complete Simplified Chinese counterpart (`*.zh-CN.md`), whose internal references stay in Chinese. UI metadata is also English by default; `agents/openai.zh-CN.yaml` preserves the Chinese version for optional manual replacement of `agents/openai.yaml`. Documentation language does not change the bundled Mandarin voice or the language of existing sample assets. Request your preferred narration language and voice explicitly.
 
 ## Usage examples
 

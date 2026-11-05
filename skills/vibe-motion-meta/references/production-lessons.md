@@ -1,44 +1,46 @@
-# 代码动画制作与返工经验
+# Code animation production and revision lessons
 
-本页来自一次产品解释动画的实际制作与返工，属于工程复盘；不能当作浙大猫学长的原话、网站作品的源码结论或通用美学定律。网站上实际观察到什么，应另记作品链接与观察记录。这里的方案按当前题材选择，不默认加入子弹时间、鱼眼、特定角色、配色或固定时长。
+English | [简体中文](production-lessons.zh-CN.md)
 
-## 让画面解释事情
+This is an engineering retrospective from producing and revising a product explainer. It is not a quotation from 浙大猫学长, an analysis of website source code, or a universal aesthetic rule. Record actual website observations separately with work URLs. Apply these choices to the current subject; bullet time, fisheye, particular characters, palettes, and fixed durations are not defaults.
 
-“元素不够多”先检查观众能否看见过程。优先增加有角色的对象：输入、任务、查询、证据、结果、通知；让它们参与状态变化。终端片段、趋势和拓扑有助于交代机制时才加入，避免同时争夺注意力。
+## Make visuals explain the process
 
-每个关键动作指定一个主角。查询依次亮起，正在处理的对象强化，已完成对象退到背景；发现证据后再进入强调镜头。用短标签、状态与动作承载信息，能由变化看懂的内容不再永久附加说明段落。
+When a scene seems to need more elements, first check whether viewers can see the process. Prefer objects with roles: inputs, tasks, queries, evidence, results, and notifications. Let them change state. Add terminal snippets, trends, or topology only when they clarify the mechanism rather than competing for attention.
 
-连续转场应保留对象身份。例如输入框发送后成为任务标签，查询连线收成报告分隔线，证据票展开成通知卡，圆环接到片尾形象。给交接双方共用位置、尺寸、曲线和时间，避免两个相似对象各自淡入淡出却没有真正接上。
+Give each key action one main subject. Activate queries in sequence, emphasize the object being processed, and move completed objects into the background. Enter an emphasis shot after evidence appears. Use short labels, states, and actions; avoid permanent explanatory paragraphs when the change already communicates the point.
 
-## 常见故障与工程选择
+Continuous transitions preserve object identity: a submitted input becomes a task label, a query line becomes a report divider, an evidence ticket expands into a notification card, or a ring becomes an ending motif. Share position, dimensions, curves, and timing across the handoff rather than independently fading two similar objects without connecting them.
 
-| 现象 | 检查与处理 |
+## Common failures and engineering choices
+
+| Symptom | Inspection and treatment |
 | --- | --- |
-| 放大截图时文字抖动、边缘发虚 | 需要可编辑界面的镜头优先原生矢量／场景对象；按最终分辨率重绘。先排查低分辨率截图缩放、像素取整、重采样与帧率，不用随机抖动掩盖问题。 |
-| 中间特效强，开头结尾仍像幻灯片 | 为各段安排克制的推进、横移与交接，保持共用锚点；是否运镜及其幅度由内容决定，不给所有对象持续漂浮。 |
-| 所有小面板都很抢眼 | 拉开主次、错峰激活。主卡底板保持实色，只减弱次要文字／线条；降低整张卡的透明度会使底下连线透过文字。 |
-| 长短标题切换或报告展开时叠字 | 旧文字先退净，再显新文字；底板和连线可以先变形。抽查交界前后多帧，别只检查两个稳定端点。 |
-| 字符串完整，成片却缺字 | 检查真实渲染字体、字形、裁切与回退；逐字看实际画面。源码、测宽和编译成功均不能证明字形完整。 |
-| 鱼眼网格出现细缝或亮线 | 检查分块边缘的覆盖和抗锯齿；按渲染器采用边缘扩展或适当重叠，在运动中确认接缝消失，而非用更强畸变遮掩。 |
+| Jittery text or soft edges when enlarging screenshots | For editable interfaces, prefer native vectors/scene objects and redraw at final resolution. Inspect low-resolution scaling, pixel rounding, resampling, and frame rate before considering stylistic motion; random jitter cannot repair the issue. |
+| Strong middle effects but slideshow-like opening/ending | Design restrained pushes, pans, and handoffs with common anchors across sections. Let content determine movement and amplitude; avoid continuously floating every object. |
+| Every small panel competes for attention | Separate hierarchy and stagger activation. Keep the main card background opaque while reducing secondary text/lines. Lowering whole-card opacity lets underlying lines show through text. |
+| Overlapping text during title changes or report expansion | Clear old text before showing new text; backgrounds and connectors may morph earlier. Sample several frames around the boundary, not just stable endpoints. |
+| Complete source strings but missing glyphs in the film | Inspect actual fonts, glyph coverage, clipping, and fallbacks. Read the rendered frame character by character. Source strings, width measurement, and compilation cannot prove glyph completeness. |
+| Seams or bright lines in a fisheye mesh | Inspect tile-edge coverage and antialiasing. Use suitable edge expansion or overlap for the renderer and confirm the seam disappears in motion rather than hiding it with stronger distortion. |
 
-## 慢动作、环绕与文字清晰度
+## Slow motion, orbiting, and readable text
 
-子弹时间要暂停一个值得观看的事件：证据命中、结构展开或关系揭示。先让观众看见事件发生，再减速和环绕，恢复后把同一对象送往下一场景；仅冻结一排普通卡片很难形成高潮。
+Bullet time should pause an event worth watching: evidence arrival, structural expansion, or a revealed relationship. Show the event, slow down and orbit, then send the same object into the next scene after resuming. Freezing ordinary cards alone rarely creates a climax.
 
-分开输出时钟与世界时钟：`t_world = f(t_output)`。物体、粒子、扫描线与状态使用同一世界时钟，相机可继续沿输出时钟移动。减速和恢复采用连续的速度变化，预览与导出复用同一映射，避免特效段前后跳位。
+Separate output and world clocks: `t_world = f(t_output)`. Objects, particles, scan lines, and state share world time; cameras may continue along output time. Use continuous speed changes when slowing and resuming. Preview and export must share the mapping to avoid jumps around the effect.
 
-需要透视与鱼眼时，可先渲染卡片几何，再按投影后的锚点以最终分辨率绘制文字，避免字形反复经过贴图和镜头重采样。文字必须跟随所属卡片，检查整个环绕范围的遮挡、边缘出屏和压扁；必要时限制横向压缩或调整布局，不把清晰度全交给更高码率。
+For perspective and fisheye, consider rendering card geometry first, then drawing text at final resolution using projected anchors, avoiding repeated texture/camera resampling of glyphs. Text must follow its card. Check occlusion, edge exits, and compression throughout the orbit; limit horizontal compression or adjust layout when needed. Higher bitrate alone does not establish readability.
 
-## 声音与证据边界
+## Sound and evidence boundaries
 
-声音跟随最终输出时间。延长冻结、挪动证据揭示或通知展开后，同步移动提示音；停顿时降低环境声，恢复时可用干净落点形成速度差。关键动作需要才发声。峰值、削波和响度检查辅助实际听感检查，不能替代听音及音画同步确认。
+Sound follows final output time. After extending a freeze or moving an evidence reveal or notification expansion, retime its sound. Lower ambience during pauses; a clean landing on resumption can reinforce speed changes. Sound important actions when useful. Peak, clipping, and loudness checks support, rather than replace, listening and synchronization review.
 
-演示趋势、日志和追踪片段不能伪装成实测。观察到某阶段耗时增长，不等于已确认某项配置错误；报告与通知继续区分已观察、待核对和建议。没有真实数据就不用虚构性能数字增强戏剧性。
+Demo trends, logs, and traces must not appear to be measurements. An observed increase in stage duration does not establish a specific configuration fault. Reports and notifications should distinguish observations, items to verify, and recommendations. Avoid fictional performance numbers for drama.
 
-## 修改与交付
+## Revision and delivery
 
-品牌、角色、渠道和片尾文案集中管理。按用户本次指定的改名范围，核对相关的页眉、输入提示、请求句、计划项、通知、循环标签、片尾及其转场目标；只改片尾时不要顺手改其他场景。名称长度变化后重新测宽与居中，别只做全文替换。
+Centralize brand, character, channel, and ending copy. Apply the requested rename scope to relevant headers, placeholders, requests, plan items, notifications, loop labels, ending, and transition targets. An ending-only change does not authorize changing every scene. Remeasure widths and centering when name length changes rather than relying on global text replacement.
 
-用户要求去品牌、对外分享或打包时，检查当前交付范围的文件名、源码、图片、文档、提示词、路径、媒体元数据和压缩包解压内容。提示词可能保留旧项目名：原始记录保留在非交付工作区，公开复现提示词如有删减，应如实标明，不能冒充逐字原文。保留第三方许可证与 AI 内容凭证，不为去品牌抹除来源。
+For branding removal, external sharing, or packaging, inspect filenames, source, images, documents, prompts, paths, media metadata, and archive contents in the delivery scope. Prompts may retain old project names. Keep originals outside the deliverable workspace; label public prompts edited when identifiers were removed, rather than presenting them as verbatim originals. Preserve third-party licenses and AI content credentials.
 
-最后检查实际编码的视频：文字与动作交界、强调镜头的中间姿态、通知展开及片尾。按改动风险核对时长、分辨率、帧率、音轨与解码；交付可播放文件、可编辑源码、必要素材及运行方式。源码修完但成片未重新导出，或压缩包仍装着旧文件，都不算完成。
+Inspect the actual encoded film, especially text/action boundaries, intermediate emphasis poses, notification expansion, and ending. Check duration, dimensions, frame rate, audio, and decoding according to the change's risk. Deliver a playable file, editable source, needed assets, and run instructions. Source fixes without re-exporting, or archives containing stale files, are incomplete delivery.

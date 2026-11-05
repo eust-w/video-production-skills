@@ -1,5 +1,7 @@
 # Media contracts and commands
 
+English | [简体中文](media-contracts.zh-CN.md)
+
 All paths below are task-specific. Keep the installed skill source and templates unchanged during use; copy templates to an artifact directory and pass explicit inputs. Helpers use explicit input paths and have no project-specific directory dependency.
 
 ## Dependencies
@@ -9,6 +11,7 @@ Python 3.10+, Node.js, FFmpeg/FFprobe, and a usable browser are needed for the c
 ```sh
 SKILL_DIR="${CODEX_HOME:-$HOME/.codex}/skills/product-demo-video"
 TASK_MEDIA_DIR="/absolute/path/to/demo-artifacts"
+mkdir -p "$TASK_MEDIA_DIR"
 python3 -m venv "$TASK_MEDIA_DIR/.venv"
 "$TASK_MEDIA_DIR/.venv/bin/pip" install -r "$SKILL_DIR/assets/requirements.txt"
 ```
@@ -19,6 +22,8 @@ A Chinese-capable font is required for Chinese narration captions. Pass a font e
 
 ## Plan
 
+The JSON below illustrates English copy; choose an available matching English voice with `--voice` when synthesizing it. The bundled example asset and default voice remain Chinese.
+
 Copy `assets/plan.example.json`. Keep chapter IDs unique and safe as filenames. Order in `chapters` is film order. The product name and duration are examples, not requirements.
 
 ```json
@@ -27,8 +32,8 @@ Copy `assets/plan.example.json`. Keep chapter IDs unique and safe as filenames. 
   "pronunciations": {"NOVA": "N O V A"},
   "video": {"width": 1600, "height": 1000, "caption_band": 120, "fps": 30},
   "chapters": [
-    {"id": "intro", "title": "从一个问题开始", "narration": "NOVA 帮你整理信息。"},
-    {"id": "inspect", "title": "查看结果", "narration": "这里用演示数据说明操作。", "persistent_label": "演示数据"}
+    {"id": "intro", "title": "Start with a question", "narration": "NOVA helps organize your information."},
+    {"id": "inspect", "title": "Inspect the result", "narration": "This example uses demo data to show the workflow.", "persistent_label": "Demo data"}
   ]
 }
 ```
@@ -54,7 +59,7 @@ The first command validates offline; the second synthesizes. Use a new output di
 The audio manifest has `status`, `plan_sha256`, voice settings, and `chapters`. Each chapter records `id`, `display_text`, `speech_text`, `wav_file`, actual duration, hashes, raw service boundaries, and captions:
 
 ```json
-{"start_seconds":0.1,"end_seconds":2.8,"text":"这里用演示数据说明操作。"}
+{"start_seconds":0.1,"end_seconds":2.8,"text":"This example uses demo data to show the workflow."}
 ```
 
 Caption timestamps are relative to that audio file's start. The compositor adds the actual chapter and narration placement offsets. Keep the raw boundary metadata when reconciling short overlaps or quote glyph omissions. Changed wording needs changed audio.
@@ -86,7 +91,7 @@ Copy `assets/edit.example.json`. The top-level object maps chapter IDs to edit d
       {"path":"recordings/query.webm","start":1.2,"end":6.8},
       {"path":"recordings/query.webm","start":20.0,"end":26.0,"crop":[200,120,1100,700]}
     ],
-    "label":"演示数据"
+    "label":"Demo data"
   }
 }
 ```

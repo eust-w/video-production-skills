@@ -1,5 +1,7 @@
 # Recording practicalities
 
+English | [简体中文](recording.zh-CN.md)
+
 ## Capture route
 
 Use an available browser/recording integration if it supports the required work and follow its instructions. Otherwise use the portable Playwright wrapper. Check existing app/package scripts and local ports before starting services. Keep the user's current browser and unrelated services intact.

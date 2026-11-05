@@ -1,14 +1,16 @@
 # Product story and review
 
+English | [简体中文](story-and-review.zh-CN.md)
+
 ## Build around a task
 
 A useful default arc is: recognizable problem → ask naturally → inspect evidence → narrow the cause → interact with the result → share or keep watching. Adapt this to the product; it is not a fixed chapter count.
 
 Examples of narration:
 
-- “先看整体情况，再挑最值得关注的部分继续查。”
-- “这条线索还不能说明全部原因。我们看看还有什么证据。”
-- “需要交给同事时，可以把这段结果带走。”
+- “Start with the overall picture, then investigate the most useful details.”
+- “This clue does not explain everything yet. Let’s look for more evidence.”
+- “When you need to share with a colleague, export this result.”
 
 Useful production questions concern audience, duration, language, or an unknown product behavior. Infer ordinary choices from the request and keep doing independent preparation while an optional answer is pending. The default Xiaoxiao voice is already selected.
 
@@ -16,7 +18,7 @@ Useful production questions concern audience, duration, language, or an unknown 
 
 Test logs can justify readiness without becoming the introduction. In a product demo, show the user's question, visible tool progress when useful, and readable results. Replace verbose recording prompts or API parameter instructions with normal user language when rerecording is possible. Inspect the screen itself, not only the spoken text.
 
-A simulated section can open with “接下来用演示数据介绍……” and retain a small “演示数据” label. Do not narrate fake notifications as real deliveries. If a capability is not connected, preserve that limitation as a short product setup note or omit the failed feature from the main story while keeping the disclosed gap.
+A simulated section can open with “Next, we will use demo data to show…” and retain a small “Demo data” label. Do not narrate fake notifications as real deliveries. If a capability is not connected, preserve that limitation as a short product setup note or omit the failed feature from the main story while keeping the disclosed gap.
 
 ## Narration
 

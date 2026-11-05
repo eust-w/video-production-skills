@@ -5,6 +5,8 @@ description: Create or revise product introduction and software demonstration vi
 
 # Product demo video
 
+English | [简体中文](SKILL.zh-CN.md)
+
 Turn a working product into a user-facing walkthrough: a recognizable problem, a clear action, the visible result, and the next useful step. Deliver a playable video, synchronized SRT, and a clean narration script.
 
 ## Defaults and scope
@@ -20,7 +22,7 @@ Turn a working product into a user-facing walkthrough: a recognizable problem, a
 
 Read the product's relevant docs, current UI, and existing artifacts. If testing or local startup is requested, complete the relevant checks separately from the film's story. Use existing authorized services and preserve unrelated processes and data.
 
-Classify proposed demonstrations as actual operation, explicitly simulated data, or unavailable. Tie each scene to an observable result. A simulated adapter or prepared dataset remains visibly labelled **演示数据**; describe a missing integration as a product setup requirement instead of implying success. Recording does not authorize production changes, paid subscriptions, external publication, or real notifications to other people.
+Classify proposed demonstrations as actual operation, explicitly simulated data, or unavailable. Tie each scene to an observable result. A simulated adapter or prepared dataset remains visibly labelled **Demo data** (or an equivalent label in the film’s language); describe a missing integration as a product setup requirement instead of implying success. Recording does not authorize production changes, paid subscriptions, external publication, or real notifications to other people.
 
 **Done:** every proposed capability has a recording source or an explicit boundary; no unsupported promise is in the outline.
 

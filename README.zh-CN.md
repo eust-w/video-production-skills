@@ -9,6 +9,8 @@
 | [product-demo-video](skills/product-demo-video/SKILL.md) | 产品介绍、录屏、中文旁白与同步字幕 | Playwright 录制、Edge TTS、FFmpeg 剪辑、SRT、媒体验证、测试与模板 |
 | [vibe-motion-meta](skills/vibe-motion-meta/SKILL.md) | 技术解释动画、MG、B-roll | 创作流程、MotionFace 参考研究、生态路由、工程经验与交付审计 |
 
+两个 Skill 的默认 `SKILL.md`、参考文档和界面元数据均为英文。每份文档提供完整的 `.zh-CN.md` 中文版及互链，中文版内部引用指向中文资料。`agents/openai.zh-CN.yaml` 保留中文界面元数据，如需可手动替换 `agents/openai.yaml`。文档语言不会改变默认中文声音或现有示例素材；其他配音语言请显式指定。
+
 ## 安装
 
 克隆仓库，将所需 Skill 的**整个目录**复制到助手的技能目录。Codex 示例（已有同名目录时先备份，避免覆盖自定义内容）：

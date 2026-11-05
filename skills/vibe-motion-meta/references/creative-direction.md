@@ -1,64 +1,64 @@
-# 内容、脚本与分镜
+# Content, script, and storyboard
 
-这是创作建议，不是浙大猫学长逐字总结的方法。允许根据题材、已有素材和用户目标调整。工具选型另见 [resources.md](resources.md)。
+English | [简体中文](creative-direction.zh-CN.md)
 
-新创作／重要视觉改版前，必须先完成 [网站学习](website-study.md)，把真实观察转成以下分镜选择。代码实现中的清晰度、运镜与转场故障另见 [制作复盘](production-lessons.md)。
+This is creative guidance, not a verbatim account of the methods of 浙大猫学长. Adapt it to the subject, available material, and user's goals. See [resources](resources.md) for tool selection.
 
-## 从材料到主线
+Before new work or a substantial visual redesign, complete the [website study](website-study.md) and turn actual observations into shot choices. For implementation problems involving clarity, camera work, and transitions, see [production lessons](production-lessons.md).
 
-读材料时分别提取：要传达的主张、支撑事实、关键对象、关系／机制、限制条件。PPT 页序是输入结构，不必成为视频顺序。保留事实出处，避免为戏剧性创造性能数字或缺失的因果。
+## From source material to a story
 
-选择合适的推进方式，例如：
+Extract the claim, supporting facts, key objects, relationships/mechanisms, and limitations. Slide order is an input structure, not necessarily the video sequence. Preserve factual sources; avoid inventing performance numbers or causal links for drama.
 
-| 内容 | 可采用的推进方式 | 画面承担的工作 |
+| Content | Possible progression | Role of the visuals |
 | --- | --- | --- |
-| 机制科普 | 有趣现象 → 简化模型 → 逐步加规则 → 解释结果 | 让观众看到规则改变了什么 |
-| 产品／解决方案 | 使用情境 → 具体阻碍 → 操作过程 → 结果与证据 | 演示真实操作或可核验的机制 |
-| 案例／故事 | 目标 → 约束 → 选择 → 后果 | 让人物／对象的状态连续变化 |
-| 品牌 MG | 核心主张 → 少量视觉母题 → 强记忆收束 | 用字形、构图、节奏强化品牌信息 |
-| 音乐／歌词 | 音乐结构／意象 → 视觉母题变化 → 高潮与回收 | 配合节拍与情绪，不强加科普论证 |
+| Mechanism explainer | Interesting phenomenon → simplified model → incremental rules → explanation | Show what each rule changes |
+| Product/solution | Use context → concrete obstacle → operation → result and evidence | Demonstrate real actions or verifiable mechanisms |
+| Case/story | Goal → constraints → choices → consequences | Maintain continuous state changes for people/objects |
+| Brand motion graphics | Core claim → a few visual motifs → memorable resolution | Reinforce brand information through typography, composition, and rhythm |
+| Music/lyrics | Musical structure/imagery → motif development → climax and return | Support beats and emotion without imposing a scientific argument |
 
-选题可寻找“熟悉结果背后的陌生机制”或“少数规则产生复杂行为”的认知差距。不是每段都需要夸张钩子；标题承诺应与成片一致。
+A subject may expose an unfamiliar mechanism behind a familiar outcome, or complex behavior arising from a few rules. Every section does not need an exaggerated hook. The film must deliver on its title.
 
-## 旁白与信息密度
+## Narration and information density
 
-把书面要点改成能说出来的话：具体对象、动作和结果优先。新术语首次出现时给观众可操作的含义，再保留必要的专业表达。避免用一串抽象名词代替演示。
+Turn written points into speech: prioritize concrete objects, actions, and outcomes. Give new terms an operational meaning on first use, then retain necessary technical language. Abstract noun lists cannot replace demonstrations.
 
-有现成旁白／SRT 时先检查语义和时间轴。只有用户要求改写或实际需要修正时才改原文；保持不可改的歌词、字幕原文及既有时序。镜头可以覆盖连续多句，不需要每句单独创建卡片。
+For existing narration/SRT, inspect meaning and timing first. Rewrite only when requested or necessary to correct a problem. Preserve protected lyrics, exact caption wording, and established timing. One shot may span several sentences; each sentence does not need its own card.
 
-脚本尚未定稿时先解决事实与逻辑，再精修动效。用户已要求直接成片时，这是内部迭代顺序，不是必须停下来等确认的审批步骤。
+If the script is unfinished, resolve facts and logic before polishing animation. For a direct request for a finished video, this is an internal iteration sequence, not an approval gate.
 
-## 镜头说明的最小内容
+## Minimum shot description
 
-根据作品复杂度，用简短表格或结构化记录包含：
+Use a brief table or structured note, scaled to the work's complexity, covering:
 
-- 本镜头传达什么，以及对应旁白／字幕的时间范围。
-- 出现的对象、初始状态与观众应关注的位置。
-- 动作／规则、可见结果、与下一镜头保留的关系。
-- 需要的代码组件、素材和声音；事实与素材来源。
+- What the shot communicates and its narration/caption time range.
+- Objects, initial state, and intended focus of attention.
+- Action/rule, visible outcome, and relationship retained into the next shot.
+- Required code components, assets, and sound; factual and asset sources.
 
-机制镜头可参考这个例子：
+Example mechanism shot:
 
-> 主题：调度规则为什么重要。初始：一些任务排队，同时部分节点空闲。动作：改变任务与节点的匹配规则。结果：任务进入合适节点，队列变化。交接：保留同一批任务，继续解释资源约束。标注：示意动画，除非有实测数据，否则不显示效率提升百分比。
+> Topic: why scheduling rules matter. Initial state: tasks queue while some nodes are idle. Action: change the task-to-node matching rule. Outcome: tasks enter suitable nodes and the queue changes. Handoff: retain the same tasks to explain resource constraints. Label: illustrative animation; show no efficiency-improvement percentage without measurements.
 
-这是解释表达示例，不是规定所有项目使用某个领域隐喻。重要规则变化应能被看见；装饰性弹跳不能冒充因果。
+This illustrates explanatory storytelling, not a compulsory domain metaphor. Important rule changes must be visible; decorative bouncing is not causal explanation.
 
-## 视觉与动作
+## Visuals and motion
 
-先看最复杂的关键静帧：主次、文字大小、路径与关系是否清楚。解释型画面中，状态、颜色、形状应有稳定含义；镜头移动服务注意力和尺度变化。跨镜头保留对象身份或建立清楚交接，避免观众重新辨认。
+Start with the most complex key frame: are hierarchy, text size, paths, and relationships clear? In explanatory scenes, states, colors, and shapes need stable meanings. Camera movement guides attention and scale. Preserve object identity across shots or establish a clear handoff so viewers need not identify everything again.
 
-动作按用途决定：预备帮助预测，缓入缓出表现惯性，跟随与延迟表现重量，停顿留出理解时间。只有适合时才使用挤压拉伸、手绘抖线或夸张动作。参考 Disney 原则类 Skill，不等于每个 UI 元素都要角色化。
+Choose motion by purpose: anticipation supports prediction, easing suggests inertia, follow-through and delay convey weight, and pauses allow comprehension. Use squash/stretch, hand-drawn line variation, or exaggeration only when suitable. A Disney-principles skill does not require personifying every UI element.
 
-手绘、三维、纸张、霓虹、界面等是可选视觉语言。先从用户品牌和参考确定一致性；不要把第三方参考或社区复刻的外观宣称为作者本人原创。
+Hand-drawn, 3D, paper, neon, and interface aesthetics are options. Establish consistency from the user's brand and references. Attribute third-party references and community recreations accurately rather than claiming them as the creator's original designs.
 
-## 声音与节拍
+## Sound and beats
 
-旁白优先的作品先保留可理解的语速与停顿，再让动作在关键词、揭示和结论附近落点。音乐优先的作品可跟随节拍与段落。转场、碰撞、完成反馈等需要时配音效，不必让每次移动都发声。
+For narration-led work, preserve understandable speech and pauses, then place actions near key words, reveals, and conclusions. Music-led work may follow beats and sections. Add transition, collision, or completion sounds when useful; every movement need not make a sound.
 
-SRT 首条不从零开始时，区分录音的全局时间与镜头的局部时间。若片段制作把字幕起点归零，合入原录音前要补回相同前导时间，或对音频、字幕和画面应用同一裁切偏移。不要直接拼接归零画面与未裁切旁白，也不要用未经核对的最短流裁切掩盖时长差异。
+If the first SRT entry starts after zero, distinguish global recording time from local shot time. If clip production resets captions to zero, restore the same lead-in before combining with the original recording, or apply one consistent trim offset to audio, captions, and visuals. Do not concatenate zero-based visuals with untrimmed narration or hide unchecked duration differences using shortest-stream truncation.
 
-检查实际听感和音画关系；波形、响度或频谱只辅助定位。音效选择、程序合成、混音是不同任务，按需调用声音子 Skill。不要为了得到一个提示音引入整套合成器。
+Listen to the actual result and check audiovisual relationships. Waveforms, loudness, and spectra are diagnostic aids. Sound selection, procedural synthesis, and mixing are different tasks; load relevant sound subskills only as needed. A single notification sound does not justify an entire synthesizer stack.
 
-## 完成前的判断
+## Before finishing
 
-成片是否兑现开头的问题或承诺？画面是否解释了文字之外的关系？是否有无证据的数字、混淆的对象或不可读信息？动作和声音是否抢走理解所需的注意力？检查用户实际需要的输出，再交付相应成品。
+Does the film answer its opening question or fulfill its promise? Do visuals explain relationships beyond the words? Are any numbers unsupported, objects confused, or details unreadable? Do movement and sound consume attention needed for understanding? Inspect the output the user actually needs and deliver that result.
