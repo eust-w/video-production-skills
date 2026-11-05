@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>产品介绍</title>
+<style>
+:root{--accent:#2563eb;--ink:#172033;--paper:#f5f6f8}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif}.card{position:absolute;inset:24px;border:1px solid #e6e8ec;border-radius:30px;background:white;padding:48px 64px;display:flex;flex-direction:column}.brand{font-size:40px;font-weight:700;letter-spacing:-.03em}.body{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:28px;max-width:1200px;align-self:center}.eyebrow{font-size:22px;color:var(--accent);font-weight:600}h1{font-size:clamp(40px,4.6vw,80px);letter-spacing:-.025em;line-height:1.18;max-width:1150px;margin:0}p{font-size:30px;line-height:1.55;color:#646e80;max-width:1100px;margin:0}.rule{height:4px;width:72px;border-radius:3px;background:var(--accent);margin-top:16px}.footer{font-size:20px;color:#717b8b}.body>*{animation:enter .65s both}.body>:nth-child(2){animation-delay:.12s}.body>:nth-child(3){animation-delay:.24s}@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.body>*{animation:none}}
+</style></head><body><section class="card"><div class="brand" id="product">NOVA</div><div class="body"><div class="eyebrow" id="eyebrow">从一个问题开始</div><h1 id="title">让信息变成下一步行动</h1><p id="subtitle">说清问题，查看线索，再决定下一步。</p><div class="rule"></div></div><div class="footer" id="footer">产品介绍与操作演示</div></section><script>
+const q=new URLSearchParams(location.search);
+for(const id of ['product','eyebrow','title','subtitle','footer'])if(q.has(id))document.getElementById(id).textContent=q.get(id);
+const color=q.get('accent');if(color&&/^#[0-9a-f]{6}$/i.test(color))document.documentElement.style.setProperty('--accent',color);
+document.title=document.getElementById('product').textContent+' · 产品介绍';
+</script></body></html>

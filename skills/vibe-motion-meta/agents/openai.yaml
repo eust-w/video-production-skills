@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe Motion 创作总控"
+  short_description: "先实看 MotionFace 参考，再将材料制作成连续、清晰、有节奏的视频"
+  default_prompt: "使用 $vibe-motion-meta 制作视频：先实际浏览浙大猫学长的 MotionFace 网站并记录可借鉴的动作与转场，再把我的材料制作成清楚、有表现力的成片和可编辑源码；按需复用合适的 Skills、代码和声音工具。"

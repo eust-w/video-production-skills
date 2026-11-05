@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品演示视频"
+  short_description: "制作面向用户的产品演示视频，配自然女声、同步字幕与真实操作画面"
+  default_prompt: "使用 $product-demo-video 为当前项目制作产品介绍与操作演示视频，沿用默认自然女声。"

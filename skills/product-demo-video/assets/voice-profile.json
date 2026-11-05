@@ -1,0 +1,19 @@
+{
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+0%",
+  "pitch": "+0Hz",
+  "volume": "+0%",
+  "language": "zh-CN",
+  "label": "自然女声 · 晓晓",
+  "selection": "Bundled configurable default; explicit user language and voice choices take precedence.",
+  "timing": "SentenceBoundary",
+  "audio": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "integrated_lufs": -18,
+    "true_peak_dbtp": -1.5,
+    "loudness_range": 7
+  },
+  "provider": "Microsoft Edge online neural speech via edge-tts",
+  "provider_note": "Online third-party client; no availability or free-service SLA is assumed. Send narration text only. If unavailable, retain this profile and report the failure; do not silently substitute system speech."
+}

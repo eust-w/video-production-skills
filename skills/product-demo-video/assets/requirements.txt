@@ -1,0 +1,4 @@
+# Proven baseline; upgrade only with an actual smoke test.
+edge-tts==7.3.1
+Pillow>=10,<13
+fonttools>=4,<5

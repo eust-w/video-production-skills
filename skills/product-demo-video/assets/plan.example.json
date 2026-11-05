@@ -1,0 +1,9 @@
+{
+  "product": "NOVA",
+  "pronunciations": {"NOVA": "N O V A"},
+  "video": {"width": 1600, "height": 1000, "caption_band": 120, "fps": 30},
+  "chapters": [
+    {"id": "intro", "title": "从一个问题开始", "narration": "NOVA 把分散的信息放到同一个工作台。先说清问题，再看看有哪些线索。"},
+    {"id": "walkthrough", "title": "沿着线索继续查", "narration": "选择一个项目，查看相关结果。这里使用演示数据，说明操作方法。", "persistent_label": "演示数据"}
+  ]
+}
