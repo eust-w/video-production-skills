@@ -1,51 +1,127 @@
 # Video Production Skills
 
-两个可独立安装的 Agent Skills：真实产品演示与代码驱动解释动画。面向支持 `SKILL.md` 格式的编程助手，提供 Codex 安装示例。
+English | [简体中文](README.zh-CN.md)
 
-| Skill | 用途 | 包含内容 |
+Two independently installable Agent Skills for real product demonstrations and code-driven explainer videos. Each skill includes a `SKILL.md` entry point and its supporting resources. The installation examples below target Codex; other assistants must support this skill format and provide compatible tools.
+
+| Skill | Use it for | Included resources |
 | --- | --- | --- |
-| [product-demo-video](skills/product-demo-video/SKILL.md) | 产品介绍、录屏、中文旁白与同步字幕 | Playwright 录制、Edge TTS、FFmpeg 剪辑、SRT、媒体验证、测试与模板 |
-| [vibe-motion-meta](skills/vibe-motion-meta/SKILL.md) | 技术解释动画、MG、B-roll | 创作流程、MotionFace 参考研究、生态路由、工程经验与交付审计 |
+| [product-demo-video](skills/product-demo-video/SKILL.md) | Product introductions, recorded walkthroughs, narration, and synchronized captions | Playwright recording, Edge TTS narration, FFmpeg composition, SRT export, media verification, tests, and templates |
+| [vibe-motion-meta](skills/vibe-motion-meta/SKILL.md) | Technical explainers, motion graphics, and B-roll | Creative workflow, MotionFace reference study, tool routing, production guidance, and a delivery audit helper |
 
-## 安装
+## Installation
 
-克隆仓库，将所需 Skill 的**整个目录**复制到助手的技能目录。Codex 示例（已有同名目录时先备份，避免覆盖自定义内容）：
+### From source
+
+Clone the repository and copy the **entire directory** of each skill you want to install. Back up an existing skill with the same name before copying so you preserve any customizations.
+
+The following commands use a POSIX shell, such as Bash or Zsh:
 
 ```sh
 git clone https://github.com/eust-w/video-production-skills.git
+cd video-production-skills
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R video-production-skills/skills/product-demo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
-cp -R video-production-skills/skills/vibe-motion-meta "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/product-demo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/vibe-motion-meta "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-重新启动或刷新助手的 Skill 发现后调用：
+Restart or refresh your assistant's skill discovery, then invoke a skill by name. Install either skill independently; neither requires the other. Installation copies the instructions and helpers, but does not install runtime dependencies.
 
-```text
-使用 $product-demo-video，为我的应用制作一个两分钟的中文产品演示，展示实际操作，输出 MP4、SRT 和讲稿。
+### From a release ZIP
 
-使用 $vibe-motion-meta，把这份技术讲稿制作成解释动画，交付可播放成片和可编辑源码。
-```
+Download either package from [Releases](https://github.com/eust-w/video-production-skills/releases), extract it, and place its top-level `product-demo-video` or `vibe-motion-meta` directory in your assistant's skills directory. Keep the scripts, references, assets, and metadata together. Release assets include `SHA256SUMS` for archive verification.
 
-也可从 [Releases](https://github.com/eust-w/video-production-skills/releases) 下载单独的 ZIP 包，解压后将顶层 Skill 目录放入技能目录。其他助手的安装位置与工具接口以各自文档为准，未保证所有助手均已实测。
+For other assistants, consult their documentation for the installation directory and invocation syntax. Compatibility with every assistant has not been tested.
 
-## 运行依赖
+## Dependencies
 
-安装 Skill 本身不安装运行时。真实录屏流水线需要 Python 3.10+、Node.js、FFmpeg/FFprobe、Playwright 及可用浏览器、支持所用字幕语言的字体。使用隔离环境：
+### Product demo pipeline
+
+| Dependency | Purpose |
+| --- | --- |
+| Python 3.10+ | Narration, composition, and verification helpers |
+| Python packages in `assets/requirements.txt` | `edge-tts`, Pillow, and fonttools |
+| Node.js | Playwright recording helper; choose a version compatible with your installed Playwright |
+| Playwright and a browser | Recording real application interactions |
+| FFmpeg and FFprobe, available on `PATH` | Encoding, audio processing, probing, and media checks |
+| Fonts covering the caption language | Readable captions; Chinese captions require Chinese glyph coverage |
+| Network access for online TTS | Synthesizing narration through the configured speech service |
+
+From the repository root, create an isolated environment for the Python helpers and install Playwright locally:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install -r skills/product-demo-video/assets/requirements.txt
+.venv/bin/python -m pip install -r skills/product-demo-video/assets/requirements.txt
 npm install playwright
 npx playwright install chromium
+ffmpeg -version
+ffprobe -version
 ```
 
-录制脚本支持显式指定 Playwright 模块和浏览器路径；运行各脚本的 `--help` 查看接口。计划、剪辑与完整命令见 [media-contracts.md](skills/product-demo-video/references/media-contracts.md)。
+Install FFmpeg/FFprobe separately using your operating system's package manager. Linux browser environments may also require system libraries for Playwright. On Windows, adapt the shell commands and use `.venv\Scripts\python.exe` for the virtual environment.
 
-默认旁白为中文晓晓 `zh-CN-XiaoxiaoNeural`，可配置。在线语音由第三方 `edge-tts` 客户端访问 Microsoft 服务，需要网络且不保证可用性；只发送已审阅的旁白文本，使用者应核对服务条款。离线验证与媒体剪辑不需要在线合成。
+The recording helper accepts explicit Playwright module and browser executable paths when automatic discovery is insufficient. Run each helper with `--help` for its options. See [Media contracts and commands](skills/product-demo-video/references/media-contracts.md) for plan schemas, recording, synthesis, composition, and verification commands.
 
-`vibe-motion-meta` 是创作与工具路由 Skill，不是独立渲染引擎。它不捆绑上游项目或素材；按任务选择并检查其依赖与许可。新创作或重要视觉改版要求实际尝试浏览 MotionFace；无法访问时记录限制并使用可访问来源继续工作。
+The bundled voice is Mandarin Chinese `zh-CN-XiaoxiaoNeural`. Voice settings are configurable; explicitly request a different language and matching voice when needed. Online synthesis uses the third-party `edge-tts` client to access Microsoft's speech service, requires connectivity, and has no availability guarantee. Review the service terms and send only reviewed narration text. Offline plan validation and local media editing do not require online synthesis.
 
-## 验证
+### Motion workflow
+
+`vibe-motion-meta` provides creative guidance and tool routing rather than a standalone rendering engine. Dependencies depend on the chosen project and renderer. It does not bundle upstream projects or media; inspect their dependencies and licenses before use.
+
+For new videos or substantial visual redesigns, the skill requires an actual attempt to browse MotionFace and study playable references. If access is unavailable, record the limitation and continue with accessible sources. Its delivery audit helper uses Python's standard library.
+
+Some skill instructions and reference documents remain in Chinese. The English examples below can be used to request work in English; this README does not imply that all bundled documentation has been translated.
+
+## Usage examples
+
+Invoke these prompts in your assistant after installing the relevant skill. Provide the application location or source material needed for the task.
+
+### Record a product demonstration
+
+```text
+Use $product-demo-video to make a two-minute introduction to my application
+at http://localhost:3000. Show real interactions and their visible results.
+Use Mandarin Chinese narration with the bundled default voice.
+Deliver an MP4, synchronized SRT captions, and a narration script.
+```
+
+### Request English narration
+
+```text
+Use $product-demo-video to create an English onboarding walkthrough for
+this project. Select an available English neural voice and keep captions
+consistent with the narration. Clearly label any simulated data.
+Deliver the final video, SRT, and script.
+```
+
+### Create a technical explainer
+
+```text
+Use $vibe-motion-meta to turn the attached technical script into a
+90-second explainer in English. Show how tasks move through a scheduler
+using continuous objects and readable labels. Deliver a playable video,
+editable source, and instructions for rendering it again.
+```
+
+### Validate a narration plan offline
+
+From the repository root, copy the example plan to a task directory and edit its product name, chapters, and narration:
+
+```sh
+mkdir -p ../demo-artifacts
+cp skills/product-demo-video/assets/plan.example.json ../demo-artifacts/plan.json
+.venv/bin/python skills/product-demo-video/scripts/narrate.py \
+  --plan ../demo-artifacts/plan.json \
+  --output ../demo-artifacts/audio
+```
+
+This validates the plan without contacting the speech service. Add `--generate` only when you intend to synthesize the reviewed narration online. Use a new output directory for a new version, and consult the [media workflow reference](skills/product-demo-video/references/media-contracts.md) for resume behavior and the remaining pipeline.
+
+Recordings and generated media belong in a task-specific output directory. These skills do not grant authorization to change production systems, publish externally, or send real notifications.
+
+## Validation
+
+With the dependencies installed, run these checks from the repository root:
 
 ```sh
 .venv/bin/python -m unittest discover -s skills/product-demo-video/scripts -p 'test_*.py'
@@ -53,10 +129,12 @@ node --check skills/product-demo-video/scripts/record.cjs
 python3 skills/vibe-motion-meta/scripts/audit_delivery.py --help
 ```
 
-合成回归测试使用本地生成的图像与音调，不访问真实产品或在线语音。通过自动检查不代表已经完成画面、叙事或听感验收。
+The composition regression tests use locally generated video and tones; they do not contact a real product or online speech service. Automated checks do not replace reviewing the actual video, captions, narration, and transitions.
 
-## 来源与许可
+## Attribution and license
 
-本仓库的原创说明、脚本与模板采用 [MIT License](LICENSE)。这是从本地工作流整理的公开版本：移除了私人路径与项目专属偏好，保留了可复用的默认值、来源与历史观察范围。
+Original instructions, scripts, and templates in this repository are available under the [MIT License](LICENSE). This public edition was adapted from local workflows, with private paths and project-specific preferences removed while retaining reusable defaults and source attribution.
 
-`vibe-motion-meta` 是独立研究整理，不是浙大猫学长、MotionFace 或 Vibe Motion 官方发布或背书。来源归属见 [evidence.md](skills/vibe-motion-meta/references/evidence.md) 和 [资源索引](skills/vibe-motion-meta/references/resources.md)。历史网站状态与接口记录不构成当前可用性保证。链接指向的代码、字体、音频、媒体及服务各自保留原有许可与条款，不因本仓库的 MIT 许可而获再分发或商业使用授权。
+`vibe-motion-meta` is an independent research-based workflow. It is not an official release or endorsement by 浙大猫学长, MotionFace, or Vibe Motion. See the [source evidence](skills/vibe-motion-meta/references/evidence.md) and [resource index](skills/vibe-motion-meta/references/resources.md) for attribution and scope. Historical website and interface observations do not guarantee current availability.
+
+Linked code, fonts, audio, media, and services retain their own licenses and terms. This repository's MIT License does not grant redistribution or commercial-use rights to those external resources.
