@@ -2,11 +2,12 @@
 
 English | [简体中文](README.zh-CN.md)
 
-Two independently installable Agent Skills for real product demonstrations and code-driven explainer videos. Each skill includes a `SKILL.md` entry point and its supporting resources. The installation examples below target Codex; other assistants must support this skill format and provide compatible tools.
+Three independently installable Agent Skills for real product demonstrations, code-driven explainer videos, and short three.js promo cuts. Each skill includes a `SKILL.md` entry point and its supporting resources. The installation examples below target Codex; other assistants must support this skill format and provide compatible tools.
 
 | Skill | Use it for | Included resources |
 | --- | --- | --- |
 | [product-demo-video](skills/product-demo-video/SKILL.md) | Product introductions, recorded walkthroughs, narration, and synchronized captions | Playwright recording, Edge TTS narration, FFmpeg composition, SRT export, media verification, tests, and templates |
+| [threejs-promo-video](skills/threejs-promo-video/SKILL.md) | 20–60 s product promos and investor cuts that walk a real idea → execution → result path | three.js template driven by a storyboard JSON, spotlight callouts on real screenshots, bilingual captions, house-style matching, synthesized soundtrack, deterministic Playwright + FFmpeg rendering |
 | [vibe-motion-meta](skills/vibe-motion-meta/SKILL.md) | Technical explainers, motion graphics, and B-roll | Creative workflow, MotionFace reference study, tool routing, production guidance, and a delivery audit helper |
 
 ## Installation
@@ -23,9 +24,10 @@ cd video-production-skills
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R skills/product-demo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
 cp -R skills/vibe-motion-meta "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/threejs-promo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-Restart or refresh your assistant's skill discovery, then invoke a skill by name. Install either skill independently; neither requires the other. Installation copies the instructions and helpers, but does not install runtime dependencies.
+Restart or refresh your assistant's skill discovery, then invoke a skill by name. Install any skill independently; none requires another. Installation copies the instructions and helpers, but does not install runtime dependencies.
 
 ### From a release ZIP
 
@@ -63,6 +65,26 @@ Install FFmpeg/FFprobe separately using your operating system's package manager.
 The recording helper accepts explicit Playwright module and browser executable paths when automatic discovery is insufficient. Run each helper with `--help` for its options. See [Media contracts and commands](skills/product-demo-video/references/media-contracts.md) for plan schemas, recording, synthesis, composition, and verification commands.
 
 The bundled voice is Mandarin Chinese `zh-CN-XiaoxiaoNeural`. Voice settings are configurable; explicitly request a different language and matching voice when needed. Online synthesis uses the third-party `edge-tts` client to access Microsoft's speech service, requires connectivity, and has no availability guarantee. Review the service terms and send only reviewed narration text. Offline plan validation and local media editing do not require online synthesis.
+
+### three.js promo pipeline
+
+| Dependency | Purpose |
+| --- | --- |
+| Node.js 18+ | Renderer, sample-shot generator, and soundtrack synthesizer |
+| `three` and `playwright` (npm, from the template's `package.json`) | Scene rendering and headless frame capture |
+| Google Chrome, or `npx playwright install chromium` | WebGL rendering; installed Chrome is much faster on macOS |
+| FFmpeg and FFprobe on `PATH` | MP4 encoding, contact sheets, loudness checks |
+| Fonts covering the caption languages | Chinese captions need CJK fonts such as PingFang or Noto Sans CJK |
+
+```sh
+cp -R skills/threejs-promo-video/assets/template ../promo && cd ../promo
+npm install
+cp storyboard.example.json storyboard.json
+npm run sample-shots && npm run audio
+node render.mjs --video out-en.mp4 --audio music.wav --lang en
+```
+
+The soundtrack is synthesized locally (no samples or network). The template renders fictional sample screens until you replace them with real product frames.
 
 ### Motion workflow
 
@@ -103,6 +125,15 @@ using continuous objects and readable labels. Deliver a playable video,
 editable source, and instructions for rendering it again.
 ```
 
+### Make a 30-second promo from real product screens
+
+```text
+Use $threejs-promo-video to make a 30-second promo for investors from these
+product recordings: open with the problem, then show the real path from idea
+to execution to result with spotlighted UI, match the style of our attached
+company promo, and deliver English and Chinese MP4s.
+```
+
 ### Validate a narration plan offline
 
 From the repository root, copy the example plan to a task directory and edit its product name, chapters, and narration:
@@ -127,6 +158,8 @@ With the dependencies installed, run these checks from the repository root:
 .venv/bin/python -m unittest discover -s skills/product-demo-video/scripts -p 'test_*.py'
 node --check skills/product-demo-video/scripts/record.cjs
 python3 skills/vibe-motion-meta/scripts/audit_delivery.py --help
+node --check skills/threejs-promo-video/assets/template/render.mjs
+node --check skills/threejs-promo-video/assets/template/gen-audio.mjs
 ```
 
 The composition regression tests use locally generated video and tones; they do not contact a real product or online speech service. Automated checks do not replace reviewing the actual video, captions, narration, and transitions.

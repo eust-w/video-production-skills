@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- Fictional product UI used only to generate sample screenshots for the template.
+     Fixed absolute layout so storyboard.example.json can reference exact pixel rects (1920×960).
+     Views: ?view=describe | criteria | run&stage=1..4 | verify | release -->
+<html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0}body{width:1920px;height:960px;font:15px/1.5 "Helvetica Neue","PingFang SC",sans-serif;color:#1d2433;background:#f6f8fb;position:relative;overflow:hidden}
+.side{position:absolute;left:0;top:0;width:240px;height:960px;background:#14213a;color:#cfd8e8;padding:28px 22px}
+.side b{display:block;color:#fff;font-size:22px;margin-bottom:34px}.side div{padding:10px 12px;border-radius:8px;margin-bottom:6px}.side .on{background:#22365c;color:#fff}
+.box{position:absolute;background:#fff;border:1px solid #e3e8f0;border-radius:12px;padding:20px 24px}
+h1{position:absolute;left:300px;top:60px;font-size:34px}h2{font-size:18px;margin-bottom:12px}
+.ta{border:1px solid #cfd8e5;border-radius:8px;padding:14px;height:110px;font-size:17px;line-height:1.7}
+.cb{display:flex;gap:14px;align-items:center;height:40px;font-size:16px}.cb i{width:18px;height:18px;border:2px solid #9aa7bb;border-radius:4px}
+.stages{display:flex;justify-content:space-between;align-items:center;height:100%}.st{display:flex;gap:10px;align-items:center;font-size:16px;color:#8a95a8}
+.st span{width:30px;height:30px;border-radius:50%;border:2px solid #c9d2df;display:flex;align-items:center;justify-content:center;font-size:13px}
+.st.done{color:#1f8a5b}.st.done span{background:#e3f6ec;border-color:#1f8a5b}.st.cur{color:#0f6b46;font-weight:700}.st.cur span{background:#1f8a5b;border-color:#1f8a5b;color:#fff}
+pre{background:#101a2c;color:#d4deec;border-radius:8px;padding:18px 20px;font:14px/1.7 Menlo,monospace}
+.row{display:flex;align-items:center;justify-content:space-between;height:100%}.pill{padding:4px 12px;border-radius:999px;background:#e3f6ec;color:#1f8a5b;font-size:14px}
+.btn{border:1px solid #cfd8e5;border-radius:8px;padding:10px 18px;background:#fff;font-size:15px}.btn.p{background:#1f8a5b;color:#fff;border-color:#1f8a5b}
+</style></head><body>
+<div class="side"><b>✦ Acme Forge</b><div>Overview</div><div class="on">Runs</div><div>Releases</div><div>Settings</div></div>
+<script>
+const q = new URLSearchParams(location.search), v = q.get('view') || 'describe', stage = Number(q.get('stage') || 1);
+const box = (x, y, w, h, html) => `<div class="box" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${html}</div>`;
+const crit = ['Add lib/seats.js exporting remainingSeats(capacity, registered)', 'Throw TypeError unless both inputs are non-negative integers',
+  'Return max(0, capacity − registered)', 'Cover full, over-booked, zero and invalid input in tests', 'Add no third-party dependencies', 'All existing tests, type checks and builds pass'];
+let html = '';
+if (v === 'describe' || v === 'criteria') {
+  html += `<h1>New request</h1>`;
+  html += box(300, 140, 960, 200, `<h2>Your idea</h2><div class="ta">Add seat-quota calculation to the team events app.<br>Scope: a reusable JS function with tests. Out of scope: external services.</div>`);
+  html += box(300, 370, 960, 320, `<h2>Acceptance criteria</h2>` + crit.map(c => `<div class="cb"><i></i>${c}</div>`).join(''));
+  if (v === 'criteria') html += `<div style="position:absolute;inset:0;background:rgba(20,30,50,.35)"></div>` + box(560, 300, 800, 420, `<h2>AI suggestion</h2>` + crit.map(c => `<div class="cb"><i></i>${c}</div>`).join('') + `<div style="text-align:right;margin-top:14px"><span class="btn p">Use suggestion</span></div>`);
+}
+if (v === 'run') {
+  html += `<h1>Run details</h1>`;
+  const names = ['Clarify', 'Plan', 'Implement', 'Verify', 'Merge', 'Build', 'Release', 'Accept'];
+  html += box(300, 140, 1580, 80, `<div class="stages">${names.map((n, i) => `<div class="st ${i + 1 < stage ? 'done' : i + 1 === stage ? 'cur' : ''}"><span>${i + 1 < stage ? '✓' : i + 1}</span>${n}</div>`).join('<span style="color:#c9d2df">›</span>')}</div>`);
+  html += box(300, 250, 1580, 160, `<h2>Request</h2><div>Add seat-quota calculation to the team events app.</div>`);
+}
+if (v === 'verify') {
+  html += `<h1>Verification evidence</h1>`;
+  html += box(300, 140, 1100, 420, `<h2>node --test · exit code 0 · isolated pod</h2><pre>✔ returns remaining seats when capacity exceeds registrations
+✔ returns 0 when the event is full
+✔ returns 0 when registrations exceed capacity
+✔ returns 0 when capacity is zero
+✔ throws TypeError for negative capacity
+✔ throws TypeError for non-integer registrations
+ℹ tests 6
+ℹ pass 6
+ℹ fail 0</pre>`);
+}
+if (v === 'release') {
+  html += `<h1>Releases</h1>`;
+  html += box(300, 140, 1580, 90, `<div class="row"><div><b>Run 42ee…3a28</b><br><small>staging · 10:24</small></div><div style="display:flex;gap:14px;align-items:center"><span class="pill">● Healthy</span><span class="btn">Open app ↗</span><span class="btn">↺ Roll back</span></div></div>`);
+  html += box(300, 250, 1580, 90, `<div class="row"><div><b>Run 3cca…cce2</b><br><small>staging · yesterday</small></div><span class="pill" style="background:#fff3df;color:#b7791f">● Rolled back</span></div>`);
+}
+document.body.insertAdjacentHTML('beforeend', html);
+</script></body></html>

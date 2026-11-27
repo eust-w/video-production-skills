@@ -1,0 +1,16 @@
+{
+  "name": "threejs-promo-video-template",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic three.js promo video template: real product shots with spotlight callouts, bilingual captions, brand lockup.",
+  "scripts": {
+    "sample-shots": "node sample/make-sample-shots.mjs",
+    "audio": "node gen-audio.mjs",
+    "stills": "node render.mjs --stills 2,5,8,12,15,19,24",
+    "video": "node render.mjs --video out.mp4 --audio music.wav"
+  },
+  "dependencies": {
+    "playwright": "^1.50.0",
+    "three": "^0.170.0"
+  }
+}

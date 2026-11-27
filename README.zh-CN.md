@@ -2,14 +2,15 @@
 
 [English](README.md) | 简体中文
 
-两个可独立安装的 Agent Skills：真实产品演示与代码驱动解释动画。面向支持 `SKILL.md` 格式的编程助手，提供 Codex 安装示例。
+三个可独立安装的 Agent Skills：真实产品演示、代码驱动解释动画，以及 three.js 短宣传片。面向支持 `SKILL.md` 格式的编程助手，提供 Codex 安装示例。
 
 | Skill | 用途 | 包含内容 |
 | --- | --- | --- |
 | [product-demo-video](skills/product-demo-video/SKILL.md) | 产品介绍、录屏、中文旁白与同步字幕 | Playwright 录制、Edge TTS、FFmpeg 剪辑、SRT、媒体验证、测试与模板 |
+| [threejs-promo-video](skills/threejs-promo-video/SKILL.md) | 20–60 秒产品宣传片、投资人短片，沿真实的「想法 → 执行 → 结果」路径展示 | storyboard JSON 驱动的 three.js 模板、真实截图高亮标注、中英双语字幕、参考片风格匹配、合成配乐、Playwright + FFmpeg 确定性渲染 |
 | [vibe-motion-meta](skills/vibe-motion-meta/SKILL.md) | 技术解释动画、MG、B-roll | 创作流程、MotionFace 参考研究、生态路由、工程经验与交付审计 |
 
-两个 Skill 的默认 `SKILL.md`、参考文档和界面元数据均为英文。每份文档提供完整的 `.zh-CN.md` 中文版及互链，中文版内部引用指向中文资料。`agents/openai.zh-CN.yaml` 保留中文界面元数据，如需可手动替换 `agents/openai.yaml`。文档语言不会改变默认中文声音或现有示例素材；其他配音语言请显式指定。
+各 Skill 的默认 `SKILL.md`、参考文档和界面元数据均为英文。每份文档提供完整的 `.zh-CN.md` 中文版及互链，中文版内部引用指向中文资料。`agents/openai.zh-CN.yaml` 保留中文界面元数据，如需可手动替换 `agents/openai.yaml`。文档语言不会改变默认中文声音或现有示例素材；其他配音语言请显式指定。
 
 ## 安装
 
@@ -20,6 +21,7 @@ git clone https://github.com/eust-w/video-production-skills.git
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R video-production-skills/skills/product-demo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
 cp -R video-production-skills/skills/vibe-motion-meta "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R video-production-skills/skills/threejs-promo-video "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 重新启动或刷新助手的 Skill 发现后调用：
@@ -28,6 +30,8 @@ cp -R video-production-skills/skills/vibe-motion-meta "${CODEX_HOME:-$HOME/.code
 使用 $product-demo-video，为我的应用制作一个两分钟的中文产品演示，展示实际操作，输出 MP4、SRT 和讲稿。
 
 使用 $vibe-motion-meta，把这份技术讲稿制作成解释动画，交付可播放成片和可编辑源码。
+
+使用 $threejs-promo-video，用这些产品录屏做一个给投资人看的 30 秒宣传片：痛点开场，沿真实的「想法 → 执行 → 结果」路径高亮展示界面，参考附件里公司宣传片的风格，输出中英两版 MP4。
 ```
 
 也可从 [Releases](https://github.com/eust-w/video-production-skills/releases) 下载单独的 ZIP 包，解压后将顶层 Skill 目录放入技能目录。其他助手的安装位置与工具接口以各自文档为准，未保证所有助手均已实测。
@@ -47,6 +51,16 @@ npx playwright install chromium
 
 默认旁白为中文晓晓 `zh-CN-XiaoxiaoNeural`，可配置。在线语音由第三方 `edge-tts` 客户端访问 Microsoft 服务，需要网络且不保证可用性；只发送已审阅的旁白文本，使用者应核对服务条款。离线验证与媒体剪辑不需要在线合成。
 
+`threejs-promo-video` 需要 Node.js 18+、模板 `package.json` 里的 `three` 与 `playwright`、Google Chrome（或 `npx playwright install chromium`）、`PATH` 中的 FFmpeg/FFprobe，以及覆盖字幕语言的字体（中文需苹方或 Noto Sans CJK 等）。配乐在本地合成，不依赖素材或网络；替换为真实产品画面前，模板使用虚构示例界面渲染：
+
+```sh
+cp -R skills/threejs-promo-video/assets/template ../promo && cd ../promo
+npm install
+cp storyboard.example.json storyboard.json
+npm run sample-shots && npm run audio
+node render.mjs --video out-zh.mp4 --audio music.wav --lang zh
+```
+
 `vibe-motion-meta` 是创作与工具路由 Skill，不是独立渲染引擎。它不捆绑上游项目或素材；按任务选择并检查其依赖与许可。新创作或重要视觉改版要求实际尝试浏览 MotionFace；无法访问时记录限制并使用可访问来源继续工作。
 
 ## 验证
@@ -55,6 +69,8 @@ npx playwright install chromium
 .venv/bin/python -m unittest discover -s skills/product-demo-video/scripts -p 'test_*.py'
 node --check skills/product-demo-video/scripts/record.cjs
 python3 skills/vibe-motion-meta/scripts/audit_delivery.py --help
+node --check skills/threejs-promo-video/assets/template/render.mjs
+node --check skills/threejs-promo-video/assets/template/gen-audio.mjs
 ```
 
 合成回归测试使用本地生成的图像与音调，不访问真实产品或在线语音。通过自动检查不代表已经完成画面、叙事或听感验收。

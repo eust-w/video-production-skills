@@ -1,0 +1,4 @@
+interface:
+  display_name: "three.js Promo Video"
+  short_description: "Turn real product screens into a clear, bilingual 30-second promo"
+  default_prompt: "Use $threejs-promo-video to make a 30-second promo from my product screenshots: problem hook, the real idea → execution → result path with spotlighted UI, captions in English and Chinese, a soundtrack, and MP4 output."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "three.js 宣传片"
+  short_description: "把真实产品画面做成清晰的中英双语 30 秒宣传片"
+  default_prompt: "使用 $threejs-promo-video，用我的产品截图做一个 30 秒宣传片：痛点开场，沿真实的「想法 → 执行 → 结果」路径高亮展示界面，中英双语字幕，配乐，输出 MP4。"

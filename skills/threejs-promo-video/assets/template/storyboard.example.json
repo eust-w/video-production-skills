@@ -1,0 +1,60 @@
+{
+  "$comment": "Copy to storyboard.json and edit. Text fields accept a plain string or a per-language object {\"en\": ..., \"zh\": ...}; render with --lang. Rects are [x0, y0, x1, y1] in screenshot pixels (screen.width × screen.height).",
+  "duration": 26,
+  "fps": 30,
+  "size": [1920, 1080],
+  "theme": {
+    "accent": "#ff5a1f",
+    "accent2": "#ff8a3d",
+    "background": "#0b0504",
+    "haze": "#7a2208",
+    "dots": true
+  },
+  "brand": {
+    "company": { "en": "Acme Robotics", "zh": "示例科技" },
+    "product": "Acme Forge",
+    "logo": null,
+    "monogram": "A"
+  },
+  "screen": { "width": 1920, "height": 960 },
+  "note": { "en": "Fictional sample UI", "zh": "示例界面（虚构）" },
+  "hook": {
+    "end": 3.2,
+    "title": "AI CODING AGENT",
+    "lines": {
+      "en": ["agent> editing 12 files…", "agent> writing unit tests…", "agent> ✓ Done. All tests passed!"],
+      "zh": ["agent> 正在修改 12 个文件…", "agent> 正在生成单元测试…", "agent> ✓ 已完成，所有测试通过！"]
+    },
+    "stamp": { "en": "UNVERIFIED", "zh": "未经验证" },
+    "stampSub": { "en": "Ship it to production?", "zh": "能直接上线吗？" }
+  },
+  "steps": {
+    "en": ["Describe", "Execute & control", "Deliver"],
+    "zh": ["输入想法", "自动执行 · 人工把控", "交付上线"]
+  },
+  "captions": [
+    { "t": [0.5, 3.0], "en": "AI writes code fast, but nobody dares to ship it blind", "zh": "AI 写代码越来越快，但没人敢直接上线", "sub": { "en": "SPEED WITHOUT PROOF IS RISK" } },
+    { "t": [3.6, 10.0], "en": "Describe an idea, AI turns it into testable criteria", "zh": "输入一个想法，AI 帮你写成可验证的需求", "sub": { "en": "STEP 1 · DESCRIBE" } },
+    { "t": [10.4, 16.8], "en": "Agents build, isolated environments verify", "zh": "Agent 自动开发，隔离环境独立验证", "sub": { "en": "STEP 2 · EXECUTE & CONTROL" } },
+    { "t": [17.2, 21.3], "en": "Shipped with health checks and one-click rollback", "zh": "交付上线：健康可查，一键回滚", "sub": { "en": "STEP 3 · DELIVER" } }
+  ],
+  "shots": [
+    { "step": 0, "t": [3.2, 6.0], "img": "shots/describe.png", "frame": [296, 130, 1270, 350], "spot": [320, 186, 1240, 304],
+      "call": { "en": "One sentence: goal, scope, out of scope", "zh": "一句话写下想法：目标 · 范围 · 不改" } },
+    { "step": 0, "t": [6.0, 10.2], "img": "shots/criteria.png", "frame": [560, 290, 1370, 730], "spot": [580, 360, 1340, 600],
+      "checks": { "x": 593, "ys": [380, 420, 460, 500, 540, 580], "start": 7.2, "gap": 0.28 },
+      "call": { "en": "AI drafts six machine-checkable criteria", "zh": "AI 补全 6 条可自动判定的验收标准" } },
+    { "step": 1, "t": [10.2, 13.4], "img": "shots/run-", "seq": 4, "frame": [296, 120, 1110, 300], "spot": [302, 142, 1100, 218],
+      "call": { "en": "Stages advance on their own", "zh": "阶段自动推进，随时可暂停" } },
+    { "step": 1, "t": [13.4, 17.0], "img": "shots/verify.png", "frame": [296, 130, 1410, 570], "spot": [324, 190, 1376, 540],
+      "call": { "en": "Tests run in an isolated pod: 6/6 pass, exit 0", "zh": "隔离环境跑测试：6 项通过，退出码 0" } },
+    { "step": 2, "t": [17.0, 21.5], "img": "shots/release.png", "frame": [1000, 120, 1890, 360], "spot": [1440, 155, 1862, 215],
+      "call": { "en": "Healthy in staging, one-click rollback", "zh": "已部署：健康检查通过，可一键回滚" } }
+  ],
+  "lockup": {
+    "t": 21.5,
+    "tagline": { "en": "From one idea to a running service", "zh": "从一句话想法，到运行中的服务" },
+    "sub": { "en": "DESCRIBE · EXECUTE · DELIVER", "zh": "DESCRIBE · EXECUTE · DELIVER" },
+    "by": { "en": "An Acme Robotics product", "zh": "示例科技出品" }
+  }
+}
